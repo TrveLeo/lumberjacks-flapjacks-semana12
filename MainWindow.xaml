@@ -1,0 +1,87 @@
+<Window x:Class="FlapjacksWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lumberjacks e Flapjacks" Height="600" Width="900"
+        MinHeight="480" MinWidth="760" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1.3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Coluna 1: lumberjacks e criação de pedidos -->
+        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+            <GroupBox Header="Lumberjacks" Padding="6">
+                <StackPanel>
+                    <DockPanel Margin="0,0,0,6">
+                        <Button x:Name="adicionarLumberjackButton" DockPanel.Dock="Right" Content="Adicionar"
+                                Margin="6,0,0,0" Padding="8,2" Click="adicionarLumberjackButton_Click" />
+                        <TextBox x:Name="nomeTextBox" KeyDown="nomeTextBox_KeyDown" />
+                    </DockPanel>
+                    <ListBox x:Name="lumberjacksListBox" Height="110" />
+                    <Button x:Name="comerButton" Content="Comer flapjacks do selecionado" Margin="0,6,0,0"
+                            Padding="4" Click="comerButton_Click" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Novo pedido (para o lumberjack selecionado)" Padding="6" Margin="0,10,0,0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="60" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Crocante" VerticalAlignment="Center" />
+                        <TextBox x:Name="crocanteTextBox" Grid.Row="0" Grid.Column="1" Text="0" Margin="0,2"
+                                 PreviewTextInput="quantidadeTextBox_PreviewTextInput" />
+                        <TextBlock Grid.Row="1" Text="Mole" VerticalAlignment="Center" />
+                        <TextBox x:Name="moleTextBox" Grid.Row="1" Grid.Column="1" Text="0" Margin="0,2"
+                                 PreviewTextInput="quantidadeTextBox_PreviewTextInput" />
+                        <TextBlock Grid.Row="2" Text="Dourado" VerticalAlignment="Center" />
+                        <TextBox x:Name="douradoTextBox" Grid.Row="2" Grid.Column="1" Text="0" Margin="0,2"
+                                 PreviewTextInput="quantidadeTextBox_PreviewTextInput" />
+                        <TextBlock Grid.Row="3" Text="Banana" VerticalAlignment="Center" />
+                        <TextBox x:Name="bananaTextBox" Grid.Row="3" Grid.Column="1" Text="0" Margin="0,2"
+                                 PreviewTextInput="quantidadeTextBox_PreviewTextInput" />
+                    </Grid>
+                    <Button x:Name="enviarPedidoButton" Content="Enviar pedido à cozinha" Margin="0,8,0,0"
+                            Padding="4" Click="enviarPedidoButton_Click" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <!-- Coluna 2: estado da cozinha -->
+        <Grid Grid.Column="1" Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Fila de pedidos (FIFO)" Padding="6">
+                <ListBox x:Name="pedidosListBox" />
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Flapjacks prontos para entrega" Padding="6" Margin="0,10,0,0">
+                <ListBox x:Name="prontosListBox" />
+            </GroupBox>
+            <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                <Button x:Name="cicloButton" Content="Preparar e entregar (até 3)" Padding="4"
+                        Click="cicloButton_Click" />
+                <CheckBox x:Name="automaticoCheckBox" Content="Automático (a cada 2 segundos)" Margin="0,6,0,0"
+                          Checked="automaticoCheckBox_Alterado" Unchecked="automaticoCheckBox_Alterado" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Coluna 3: saída que seria exibida no console -->
+        <GroupBox Grid.Column="2" Header="Registro de eventos" Padding="6">
+            <DockPanel>
+                <Button x:Name="limparButton" DockPanel.Dock="Bottom" Content="Limpar registro" Margin="0,6,0,0"
+                        Padding="4" Click="limparButton_Click" />
+                <ListBox x:Name="registroListBox" />
+            </DockPanel>
+        </GroupBox>
+    </Grid>
+</Window>
